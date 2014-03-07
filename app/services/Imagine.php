@@ -59,8 +59,8 @@ class Imagine {
 		
 		$sourceDirPath  = public_path() . $info['dirname'];
 		$sourceFilePath = $sourceDirPath . '/' . $baseName;
-		try
-		{
+		//try
+		//{
 			$image = $this->imagine->open($sourceFilePath);
 			
 			// Resize for height			
@@ -86,11 +86,11 @@ class Imagine {
 			$size = $image->getSize()->widen($width*2);
 			$targetFilePath = $targetDirPath . $filename . '@2x.' . $extension;
 			$this->saveThumbnail($image, $targetFilePath, $extension, $size, $quality);
-		}
+		/*}
 		catch (\Exception $e)
 		{
 			Log::error('[IMAGE SERVICE] Failed to resize image "' . $url . '" [' . $e->getMessage() . ']');
-		}
+		}*/
 	}
 
 	private function saveThumbnail($image, $targetFilePath, $extension, $size, $quality)
