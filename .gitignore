@@ -1,0 +1,17 @@
+/bootstrap/compiled.php
+/vendor
+composer.phar
+composer.lock
+.env.local.php
+.env.php
+.DS_Store
+Thumbs.db
+public.gitignore.txt
+/public/images/*
+!/public/images/.gitkeep
+!/public/images/assets/*
+!/public/images/temp/.gitkeep
+!/public/images/uploads/.gitkeep
+!/public/images/uploads/xThumbs/.gitkeep
+!/public/images/uploads/yThumbs/.gitkeep
+!/public/images/works/.gitkeep

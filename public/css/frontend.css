@@ -1,0 +1,149 @@
+/*!
+** 
+** Additions to bootstrap css
+** 
+*/
+
+
+/*
+** Base structure
+*/
+
+html,
+body {
+  margin:0;
+  padding:0;
+  height: 100%;
+  /* The html and body elements cannot have any padding or margin. */
+}
+
+/* Wrapper for page content to push down footer */
+#wrap {
+  min-height: 100%;
+  height: auto;
+  /* Negative indent footer by its height */
+  margin: 0 auto -53px;
+  /* Pad bottom by footer height */
+  padding: 0 0 60px;
+}
+
+/* Set the fixed height of the footer here */
+#footer {
+  height: 52px; 
+  border-top: 1px solid rgba(0, 0, 0, 0.6);
+  background-image: linear-gradient(#313539, #3A3F44 60%, #484E55);
+}
+
+#footer-content{
+	padding: 7px 0;
+}
+
+#footer-content>span{
+	margin: 0 20px 0 20px;
+}
+
+.navbar{
+  box-shadow: 0px 0px 10px 5px rgba(0,0,0,0.6);
+}
+
+/*
+** Home page
+*/
+#carousel{
+  background-color:rgba(0,0,0,0.6);
+  box-shadow: 0px 0px 15px 5px black;
+}
+#carousel-featured{
+  margin-top:-20px;
+  max-width:1000px;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.thumbnail-img{
+  border: 2px solid rgba(0, 0, 0, 0.6);
+  border-radius: 4px;
+  -webkit-transition: all .2s ease-in-out;
+          transition: all .2s ease-in-out;
+}
+
+.highlight:hover,
+.highlight:focus,
+.highlight.active {
+  border-color: #428bca;  
+}
+
+
+/*
+** Work index
+*/
+
+.workContainer{
+  display:inline-block;
+  max-width: 204px;
+  background-color: #2E3338;
+  border: 2px solid rgba(0, 0, 0, 0.6);
+  border-radius: 5px;
+  border-bottom-right-radius: 5px;
+  cursor: pointer;
+  -webkit-transition: all .2s ease-in-out;
+          transition: all .2s ease-in-out;
+}
+
+.workContainer>img{
+  border-bottom: 2px solid rgba(0, 0, 0, 0.6);
+  border-radius: 4px;
+  -webkit-transition: all .2s ease-in-out;
+          transition: all .2s ease-in-out;
+  max-width:200px;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+.workInfo {
+  padding: 5px;
+}
+
+
+/*
+** Work show
+*/
+#displayImg{
+  margin-top: -18px;
+}
+#imgThumbContainer{
+  margin: 2px auto;
+  text-align:center;
+}
+
+#imgThumbContainer .thumb-display{
+  opacity: 1.0;
+  border-color: rgba(0, 0, 0, 0.6);
+  border-color: #428bca;
+}
+
+#imgThumbContainer img{
+  max-height: 100px;
+  margin: 2px 0px;
+  opacity: 0.6;
+}
+
+
+
+/*
+** Font-icon Buttons
+*/
+
+.icon-btn{
+  padding: 6px 8px 4px 9px;
+  position: relative;
+}
+
+.icon-btn>.glyphicon{
+  font-size:1.5em;
+  
+}
+.icon-btn>.btn-text{
+  top:9px;
+  position: absolute;
+}

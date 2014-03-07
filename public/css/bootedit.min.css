@@ -1,0 +1,351 @@
+/*!
+ * Additions to bootstrap css
+ * 
+ * 
+ */
+
+/*
+** Base structure
+*/
+
+/* Move down content because we have a fixed navbar that is 50px tall */
+
+body {
+  background-color: #202326;
+}
+
+.thumbnail-img{ 
+  border: 2px solid rgba(0, 0, 0, 0.6);
+  border-radius: 4px;
+  -webkit-transition: all .2s ease-in-out;
+          transition: all .2s ease-in-out;
+}
+
+.thumbnail-img.highlight:hover,
+.thumbnail-img.highlight:focus,
+.thumbnail-img.highlight.active {
+  border-color: #428bca;  
+}
+
+.note-editor .note-toolbar {
+    background-color: #2E3338;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.6);
+}
+.note-editor {
+    border: 1px solid rgba(0, 0, 0, 0.6);
+}
+.note-editor .note-editable {
+    color: #1A1A1A;
+    background-color: #DEDEDE;
+}
+
+/*
+** Tags
+*/
+
+.tag>.tag-count{
+  border-radius: 0.5em;
+    background-color: rgba(0, 0, 0, .4);
+    display: inline;
+    line-height: 1;
+    padding: 0.1em 0.6em 0.2em;
+    vertical-align: baseline;
+}
+
+.tag {
+  border-radius: 0.25em;
+  color: #FFFFFF;
+  display: inline;
+  font-size: 75%;
+  font-weight: bold;
+  line-height: 1;
+  padding: 0.2em 0.6em 0.3em;
+  text-align: center;
+  vertical-align: baseline;
+  white-space: nowrap;
+  cursor:pointer;
+}
+
+
+/*
+** Work Index
+*/
+
+.workContainer img{
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+.workInfo {
+  background-color: #2E3338;
+  border: 1px solid rgba(0, 0, 0, 0.6);
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  padding: 5px;
+}
+
+.icon-btn{
+  padding: 6px 8px 4px 9px;
+}
+
+.icon-btn>.glyphicon{
+  font-size:1.5em;
+  
+}
+.icon-btn>.btn-text{
+  top:9px;
+  position: absolute;
+}
+
+/*
+ * Global add-ons
+ */
+.sub-header {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.row > .slim-padding{
+  padding: 0 7px;
+}
+
+
+/*
+ * Manage the animation of alerts
+ */
+.alert.fade {
+  opacity: 0;
+  padding: 0px;
+  margin-bottom: 0px;
+  border: 0px solid transparent;
+  border-radius: 0px;
+  -webkit-transition: all 0.3s linear;
+	  transition: all 0.3s linear;
+}
+
+.alert.fade.in{
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  opacity: 1;
+  -webkit-transition: all 0.3s linear;
+	  transition: all 0.3s linear;
+}
+
+.panel .panel-title{
+  font-weight:bold;
+}
+
+
+/*
+ * Classes for font-icons on the left side of inputs
+ */
+.has-feedback-nav {
+  position: relative;
+}
+.has-feedback-nav .form-control-feedback-nav {
+  display: block;
+  height: 34px;
+  line-height: 34px;
+  position: absolute;
+  right: 10px;
+  text-align: center;
+  top: 0px;
+  width: 30px;
+  cursor:pointer;
+}
+.has-feedback-nav .form-control {
+  padding-left: 10px;
+  margin-top:10px;
+  margin-bottom:-5px;
+}
+
+
+
+
+/*
+ * Sidebar
+ */
+
+/* Hide for mobile, show later */
+@media (min-width: 768px){
+  .nav-collapse.collapse {
+  height: auto !important;
+  overflow: visible !important;
+  display: block;
+}}
+
+nav.navbar{
+  z-index:1001;
+}
+
+@media (min-width: 768px){
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 1000;
+  display: block;
+  padding: 70px 20px 20px;
+  background-color: #3A3F44;
+  border-right: 1px solid rgba(0, 0, 0, 0.6);;
+}}
+
+/* Sidebar navigation */
+.nav-sidebar {
+  margin-left: -20px;
+  margin-right: -21px; /* 20px padding + 1px border */
+  margin-bottom: 20px;
+}
+.nav-sidebar > li > a {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.nav-sidebar > .active > a {
+  color: #fff;
+  background-color: #272b2e;
+}
+.nav-sidebar > .active > a:hover, .nav-sidebar > .active > a:focus{
+  color: #ffffff;
+  background-color: #272b2e;
+}
+
+
+
+
+/*
+ * Main content
+ */
+
+.main {
+  padding: 20px;
+}
+@media (min-width: 768px) {
+  .main {
+  padding-left: 40px;
+  padding-right: 40px;
+}}
+.main .page-header {
+  margin-top: 0;
+}
+
+
+/*
+ * Work creation/edit thumbnails
+ */
+@media (min-width: 768px) {
+#infoPanel{
+  position:absolute;
+  bottom:0px;
+  right: 0px;
+}}
+
+
+#tempImg {
+  border: 2px solid #428bca;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+.workThumbnail {
+  position: relative;
+  max-width: 300px;
+  margin-right: auto;
+  margin-left:auto;
+  margin-bottom: 10px;
+  margin-top: -10px;
+}
+.workThumbnail img {
+  max-width:100%;
+}
+#thumbImgContainer {  
+  overflow: hidden;
+  border: 2px solid rgba(230, 114, 37, 0.6);
+  border-radius: 4px;
+  margin-right: auto;
+  margin-left:auto;
+  position: relative;
+  max-width: 300px;
+}
+
+.works-thumb-img{
+  min-width:100px;
+  max-height: 200px;
+  max-width: 98%;
+  margin: 5px;
+  
+}
+#thumbImg{
+  position: relative;
+}
+#imgContainer{
+  text-align:center;
+}
+#imgContainer > span{
+  padding: 0px;
+  margin: 5px 0;
+  max-width: 98%;
+  max-height: 200px;
+  position: relative;
+  display:inline-block;
+}
+
+.works-thumb-remove{
+  display: block;
+  height: 30px;
+  line-height: 30px;
+  position: absolute;
+  right: -3px;
+  text-align: center;
+  top: -3px;
+  width: 30px;
+  font-size: 1.5em;
+  -webkit-transition: all 0.2s linear;
+	  transition: all 0.2s linear;
+  cursor:pointer;
+}
+.works-thumb-remove.glyphicon-remove-sign:hover,
+.works-thumb-remove.glyphicon-remove-sign:focus,
+.works-thumb-remove.glyphicon-remove-sign.active{
+  color:#EE5F5B;
+}
+.works-thumb-remove.glyphicon-remove{
+  color: #272B2E;
+}
+
+#featuredImgContainer{
+  max-width:1000px
+  display:inline-block;
+}
+#featuredImgContainer>img{
+  max-width:100%;
+}
+
+/*
+ * Work index
+ */
+.works-favorite{
+  color: gold;
+}
+.works-favorite-img{
+  display: block;
+  height: 30px;
+  line-height: 30px;
+  position: absolute;
+  right: 2px;
+  text-align: center;
+  top: 6px;
+  width: 30px;
+  font-size: 2em;
+  cursor:default;
+  color: gold;
+}
+.works-favorite-img.glyphicon-star-empty{
+  font-size: 3em;
+  top: 6px;
+  right: 6px;
+}
+.works-favorite-img.glyphicon-star-empty{
+  color: #272B2E;
+}
