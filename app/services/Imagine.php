@@ -96,12 +96,9 @@ class Imagine {
 	private function saveThumbnail($image, $targetFilePath, $extension, $size, $quality)
 	{
 		// If animated gif, resize each layer first, then save
-		if($extension == "gif" && count($image->layers) > 1)
+		if($extension == "gif" && count($image->layers()) > 1)
 		{
-			for ($i = 0; $i < count($image->layers); $i++) {
-				$image[$i]->set($image[$i]->get()->thumbnail($size));
-			}
-			$image->save($targetFilePath, array('quality' => $quality, 'flatten' => 'false'));
+			$image->thumbnail($size)->save($targetFilePath, array('flatten' => 'false'));
 		}
 		// All other images resized and saved
 		else
@@ -147,14 +144,12 @@ class Imagine {
 				File::delete($targetFilePath);
 			}
 			// If animated gif, crop each layer first, then save
-			if($extension == "gif" && count($image->layers))
+			if($extension == "gif" && count($image->layers()))
 			{
-				foreach ($image->layers as $layer) {
-					$layer = $layer->strip()->crop($start, $size);
-					$finalSize = $layer->getSize()->widen($width);
-					$layer = $layer->resize($finalSize);
-				}
-				$image->save($targetFilePath, array('flatten' => 'false', 'quality' => $quality));
+				$image = $image->strip()->crop($start, $size);
+				$finalSize = $image->getSize()->widen($width);
+				
+				$image->resize($finalSize)->save($targetFilePath, array('flatten' => 'false', 'quality' => $quality));
 			}
 			// All other images cropped and saved
 			else
@@ -214,14 +209,13 @@ class Imagine {
 	{
 		$point = new \Imagine\Image\Point(0,0);
 		// If animated gif, resize each layer first, then save
-		if($extension == "gif" && count($image->layers) > 1)
+		if($extension == "gif" && count($image->layers()) > 1)
 		{
-			foreach ($image->layers as $layer) {
-				$finalSize = $layer->getSize()->widen($width);
-				$crop = new \Imagine\Image\Box($finalSize->getWidth(), $height);
-				$layer = $layer->strip()->resize($finalSize)->crop($point, $crop);
-			}
-			$image->strip()->save($targetFilePath, array('flatten' => 'false', 'quality' => $quality));
+			$finalSize = $image->getSize()->widen($width);
+			$crop = new \Imagine\Image\Box($finalSize->getWidth(), $height);
+			$image = $image->strip()->resize($finalSize)->crop($point, $crop);
+
+			$image->save($targetFilePath, array('flatten' => 'false', 'quality' => $quality));
 		}
 		// All other images cropped and saved
 		else
