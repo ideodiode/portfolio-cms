@@ -1,2 +1,0 @@
-#!/bin/sh
-T_WORK_TREE=/home/ubuntu/www/portfolio-cms.git git checkout -f  
