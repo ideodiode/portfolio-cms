@@ -10,23 +10,23 @@ class TaggablesTableSeeder extends Seeder {
 		$taggables = array(
 			[	'tag_id' => '1',
 				'taggable_id' => '1',
-				'taggable_type' => 'post'
+				'taggable_type' => 'Post'
 			],
 			[	'tag_id' => '1',
 				'taggable_id' => '2',
-				'taggable_type' => 'post'
+				'taggable_type' => 'Post'
 			],
 			[	'tag_id' => '2',
 				'taggable_id' => '1',
-				'taggable_type' => 'post'
+				'taggable_type' => 'Post'
 			],
 			[	'tag_id' => '1',
 				'taggable_id' => '1',
-				'taggable_type' => 'work'
+				'taggable_type' => 'Work'
 			],
 			[	'tag_id' => '2',
 				'taggable_id' => '1',
-				'taggable_type' => 'work'
+				'taggable_type' => 'Work'
 			]
 		);
 

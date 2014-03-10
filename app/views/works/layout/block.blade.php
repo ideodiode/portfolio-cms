@@ -20,7 +20,6 @@
 				<img src={{ asset($work->thumbnail_filepath) }} alt={{ $work->title.' thumbnail' }} class="thumbnail-img" style="max-width:{{ $width }}px;">
 				<div class="workInfo text-center">
 					<h4>{{ $work->title }}</h4>
-					<p>{{ $work->sm_description }}</p>
 					<p>
 						<a href={{ action('WorksController@edit', $work->id) }} class="btn btn-warning" role="button">Edit</a>
 						<button data-toggle="modal" data-target="#deleteModal" work-id="{{{ $work->id }}}" class="btn btn-danger">Delete</button>
@@ -35,7 +34,7 @@
 <script>
 $('#gallery').imagesLoaded( function(){
 	width = $('#gallery div').width();
-	offset = width / 30;
+	offset = 5;
 	$('#gallery .workContainer').wookmark({
 		autoResize: true,
 		container: $('#gallery'),

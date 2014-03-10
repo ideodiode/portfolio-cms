@@ -150,7 +150,7 @@ class TagsController extends BaseController {
 	 */
 	public function update($id)
 	{
-		$v = Tag::validate(Input::all());
+		$v = Tag::validate(Input::all(), $id);
 		if ( $v->passes() )
 		{
 			$tag = Tag::findOrFail($id);

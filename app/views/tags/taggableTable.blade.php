@@ -20,7 +20,7 @@
 					<td>{{ $taggable->title }}</td>
 					<td>
 						@foreach($taggable->tags as $tag)
-							#{{ ($tag->name)." " }}
+							<span class="label label-primary">{{ ($tag->name)}}</span>
 						@endforeach
 					</td>
 					@if(isset($taggable->taggable_type))

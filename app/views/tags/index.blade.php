@@ -29,14 +29,14 @@
 				</div>
 				<div class="panel-body tag-display">
 					@foreach($tags as $tag)
-						<span class="tag label-default" tag-id={{ $tag->id }} >#{{ $tag->name }}
+						<span class="tag label-default" tag-id={{ $tag->id }} ><span class="tagName">{{ $tag->name }}</span>
 							<span class="tag-count">{{ $tag->count }}</span></span>
 					@endforeach
 				</div>
 				<div class="panel-footer">
 					<div class="input-group">
 						<label for="createTag" class="sr-only">Create a New Tag:</label>
-						<span class="input-group-addon">#</span>
+						<span class="input-group-addon"><span class="glyphicon glyphicon-tag"></span></span>
 						<input type="text" class="form-control" name="createTag" placeholder="MyNewTag">
 						<span class="input-group-btn">
 							<button class="btn btn-default" type="button" id="submitTag" name="createTag">Create New Tag</button>
@@ -186,7 +186,7 @@
 			$(this).addClass("label-success");
 			
 			var $tagID = $(this).attr("tag-id");
-			var $tagName = $(this).text();
+			var $tagName = $(this).children(".tagName").text();
 			window.selectedID = $tagID;
 			
 			setModal($tagID, $tagName);
@@ -209,7 +209,6 @@
 		url = url.replace(/\d*$/, $tagID);
 		$("#updateForm").attr("action", url);
 		
-		$tagName = $tagName.substr(1);
 		$("#updateInput").val($tagName);
 	};
 	

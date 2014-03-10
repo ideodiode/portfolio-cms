@@ -1,8 +1,13 @@
 @extends('layoutPublic')
 
 @section('content')
-	<div class="row">
-		<p>contact page</p>
+	<div class="container">
+		<div class="row text-center">
+			<address>
+				<strong>Kyle Sanders</strong><br>
+				<a href="mailto:ksanders@ideodiode.com">ksanders@ideodiode.com</a>
+			</address>
+		</div>
 	</div>
 
 @stop

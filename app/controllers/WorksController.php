@@ -9,8 +9,31 @@ class WorksController extends BaseController {
 	 */
 	public function publicIndex()
 	{	
+		$choice = 'All Works';
+		$categories = array();
+		
+		if (Setting::has('work.categoryIDs') && count(Setting::get('work.categoryIDs')) != 0){
+			$categoryIDs = Setting::get('work.categoryIDs');
+			$categories = Tag::whereIn('id', $categoryIDs)->get();
+		}			
+		
+		if (Input::has('category') && Input::get('category') != 'All Works'){
+			$choice = Input::get('category');
+
+			$works = Tag::where('name', '=', $choice)
+				->leftJoin('taggables', 'tags.id', '=', 'taggables.tag_id')
+				->where('taggables.taggable_type', '=', 'Work')
+				->leftJoin('works', 'taggables.taggable_id', '=', 'works.id')
+				->select('works.id', 'works.title', 'works.thumbnail_filepath')
+				->get();
+		}
+		else
+			$works = Work::all();
+		
 		return View::make('works.public')
-			->with('works', Work::all());
+			->with('works', $works)
+			->with('categories', $categories)
+			->with('choice', $choice);
 	}
 	
 	/**
@@ -52,6 +75,7 @@ class WorksController extends BaseController {
 		Return Redirect::action('WorksController@index');
 	}
 
+	
 	/**
 	 * Display a listing of the resource in requested layout
 	 *
@@ -64,6 +88,7 @@ class WorksController extends BaseController {
 			return;
 		}
 		
+		$perPage = 20;		
 		$layoutType = "";
 		$layoutType = Session::get("works.layout"); // Use layout saved in session
 		
@@ -74,7 +99,10 @@ class WorksController extends BaseController {
 		
 		// Return list layout with pagination
 		if($layoutType == 'listLayout'){ 
-			$works = Work::with('tags')->paginate(10);
+			if (Input::has('featured'))
+				$works = Work::where('featured', '=', true)->with('tags')->paginate($perPage);
+			else
+				$works = Work::with('tags')->paginate($perPage);
 			
 			$pagination = $works->links();
 			
@@ -82,18 +110,19 @@ class WorksController extends BaseController {
 				->with('works', $works)
 				->with('pagination',$pagination);
 		}
-		// Return block view with large blocks
-		elseif($layoutType == 'lgBlockLayout'){ 
+		// Return block view
+		else{ 
+			$layoutType = 'blockLayout';
+			if (Input::has('featured'))
+				$works = Work::where('featured', '=', true)->get();
+			else
+				$works = Work::all();
+				
 			$view =  View::make('works.layout.block')
-				->with('works', Work::all())
-				->with('width', 300);
-		}
-		// Return block view with small blocks
-		else { 
-			$view =  View::make('works.layout.block')
-				->with('works', Work::all())
+				->with('works', $works)
 				->with('width', 150);
-        }
+		}
+
 		if(Request::Ajax())
 			Return Response::json(array('html'=>$view->render()));
 		
@@ -112,8 +141,13 @@ class WorksController extends BaseController {
 	public function create()
 	{
 		File::cleanDirectory(public_path().'/images/temp');
+		$relatedTagIDs = array();
+		
+		$tagsLists = Tag::getLists($relatedTagIDs);
+		$tags = $tagsLists['tags'];
+		
         return View::make('works.create')
-			->with('tags', Tag::all());
+			->with('tags', $tags);
 	}
 
 	/**
@@ -130,7 +164,6 @@ class WorksController extends BaseController {
 			
 			$work = new Work;
 			$work->title			  = Input::get('title');
-			$work->sm_description	  = Input::get('sm_description');
 			$work->lg_description	  = Input::get('lg_description');
 			$work->img_order		  = Input::get('img_order');
 			$work->featured			  = Input::has('feature');
@@ -253,7 +286,6 @@ class WorksController extends BaseController {
 		{
 			$work = Work::findOrFail($id);
 			$work->title			  = Input::get('title');
-			$work->sm_description	  = Input::get('sm_description');
 			$work->lg_description	  = Input::get('lg_description');
 			$work->img_order		  = Input::get('img_order');
 			$work->featured			  = Input::has('feature');

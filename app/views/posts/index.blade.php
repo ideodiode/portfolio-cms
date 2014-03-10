@@ -43,7 +43,7 @@
 				<td>{{ $post->title }}</td>
 				<td >
 					@foreach($post->tags as $tag) 
-						#{{ trim($tag->name) }}
+						<span class="label label-primary">{{ trim($tag->name) }}</span>
 					@endforeach</td>
 				<td>
 					<div class="row">

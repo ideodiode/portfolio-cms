@@ -26,7 +26,7 @@
 
 				<span>Tags: 
 				@foreach($tags as $tag)
-					#{{ $tag->name }}
+					<span class="label label-primary">{{ $tag->name }}</span>
 				@endforeach
 				</span>
 			</div>

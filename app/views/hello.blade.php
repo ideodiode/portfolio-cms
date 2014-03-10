@@ -2,6 +2,7 @@
 
 @section('content')
 
+@if(isset($features))
 	<div id="carousel">
 		<div id="carousel-featured" class="carousel slide" data-ride="carousel">
 			<!-- Indicators -->
@@ -25,14 +26,16 @@
 			</div>
 		</div>
 	</div>
-  <div class="container-fluid">
+@endif
+
+<div class="container-fluid">
 	<div class="row">
 		<div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
 			<div class="text-center">
 				<h1>You have arrived.</h1>
-				<p><em>Welcome to ideodiode.com, currently in development (using Laravel 4) and to be released soon.<em></p>
-				<p>Have a look at the cms admin console in progress</p>
-				<a type="button" class="btn btn-info" href={{ url('admin') }}>Admin Console</a>
+				<p><em>Welcome to ideodiode.com, currently in development and to be released soon.</em></p>
+				<p>This site is currently being used as a demo. I do not claim any images that appear on this site. As the site is still under construction, certain functionality may not be implemented and not all platforms have been tested. All public facing pages are due to be reworked with new css for better accessibility and responsiveness.</p>
+				<p>ideodiode.com was developed in PHP using the laravel 4 framework. The admin console (found via the button on the footer below), is designed as a CMS for project portfolios.</p>
 			</div>
 		</div>
 	</div>

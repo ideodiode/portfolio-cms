@@ -15,7 +15,6 @@ class CreateWorksTable extends Migration {
 		Schema::create('works', function(Blueprint $table) {
 			$table->increments('id');
 			$table->string('title')->unique();
-			$table->text('sm_description');
 			$table->text('lg_description');
 			// img_order in format /int/int/int/int where int = $imageID
 			$table->string('img_order');

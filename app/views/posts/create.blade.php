@@ -3,7 +3,9 @@
 @section('head')
 	<script src="{{ asset('js/summernote.min.js') }}"></script>
 	<link href="{{ asset('css/summernote.css') }}" rel="stylesheet">
+	
 	<script type="text/javascript" src="{{ asset('js/alert.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('js/uploadimage.js') }}"></script>
 @stop
 
 @section('content')

@@ -46,6 +46,54 @@ body {
   box-shadow: 0px 0px 10px 5px rgba(0,0,0,0.6);
 }
 
+.category {
+  border-radius: 0.25em;
+  color: #FFFFFF;
+  display: inline-block;
+  margin: 2px 0;
+  font-size: 90%;
+  font-weight: bold;
+  line-height: 1;
+  padding: 0.3em 0.6em 0.4em;
+  text-align: center;
+  vertical-align: baseline;
+  white-space: nowrap;
+  cursor:pointer;
+}
+.category>.category-count{
+  border-radius: 0.5em;
+    background-color: rgba(0, 0, 0, .4);
+    display: inline;
+    line-height: 1;
+    padding: 0em 0.4em 0.1em;
+    vertical-align: baseline;
+}
+
+
+/*
+ * Classes for font-icons on the left side of inputs
+ */
+.has-feedback {
+  position: relative;
+}
+.has-feedback .form-control-feedback {
+  display: block;
+  height: 34px;
+  line-height: 34px;
+  font-size: 1.2em;
+  position: absolute;
+  right: 5px;
+  text-align: center;
+  top: -2px;
+  width: 30px;
+  cursor:pointer;
+  z-index:100;
+}
+.has-feedback>input.form-control{
+  padding-right:40px;
+}
+
+
 /*
 ** Home page
 */
@@ -77,6 +125,16 @@ body {
 /*
 ** Work index
 */
+#categoryContainer{
+  text-align:center;
+}
+#categoryContainer>.well{
+  display:inline-block;
+}
+#categoryContainer a:hover,
+#categoryContainer a:focus{
+  text-decoration: none;
+}
 
 .workContainer{
   display:inline-block;

@@ -29,19 +29,19 @@
 		<div class="panel-body">
 			@if(isset($relatedTags) && !empty($relatedTags))
 				@foreach($relatedTags as $relatedTag)
-					<span class="tag label-success"><span class="tag-name">{{ "#".$relatedTag->name }}</span>
+					<span class="tag label-success"><span class="tag-name">{{ $relatedTag->name }}</span>
 						<span class="tag-count">{{ $relatedTag->count }}</span></span>
 				@endforeach
 			@endif
 			@foreach($tags as $tag)
-				<span class="tag label-default"><span class="tag-name">#{{ $tag->name }}</span>
+				<span class="tag label-default"><span class="tag-name">{{ $tag->name }}</span>
 					<span class="tag-count">{{ $tag->count }}</span></span>
 			@endforeach
 		</div>
 		<div class="panel-footer">
 			<div class="input-group">
 				<label for="tagName" class="sr-only">Create a New Tag:</label>
-				<span class="input-group-addon">#</span>
+				<span class="input-group-addon"><span class="glyphicon glyphicon-tag"></span></span>
 				<input type="text" class="form-control" name="tagName" placeholder="MyNewTag">
 				<span class="input-group-btn">
 					<button class="btn btn-default" type="button" id="submitTag" name="createTag">Create New Tag</button>
@@ -60,7 +60,9 @@
 */
 $(".panel-body").on("click", ".tag", function(e){
 	var value = $("#tagsInput").attr("value");
-	var tagName = $(this).children(".tag-name").text();
+	var tagName = "#"+$(this).children(".tag-name").text();
+	
+	
 	
 	// Chosen tag not selected yet, add to input
 	if(!$(this).hasClass("label-success"))
@@ -116,7 +118,7 @@ $('#submitTag').click( function(e) {
 		.done(function(response){
 			if(response.passes)
 			{
-				$("#tagsPanel .panel-body").append("<span class='tag label-info newTag' style='margin:0 .4em 0 0;'><span class='tag-name'>#"+name+"</span> <span class='tag-count'>0</span></span>");
+				$("#tagsPanel .panel-body").append("<span class='tag label-info newTag' style='margin:0 .4em 0 0;'><span class='tag-name'>"+name+"</span> <span class='tag-count'>0</span></span>");
 				$(":input[name='tagName']").val("");
 			}
 			else

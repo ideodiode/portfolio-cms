@@ -17,7 +17,7 @@
 		<thead>
 			<tr>		
 				<th class="col-xs-5">Title</th>
-				<th class="col-xs-4">Tags</th>
+				<th class="col-xs-4"><span class="glyphicon glyphicon-tags"></span> Tags</th>
 				<th class="col-xs-3">Actions</th>		
 			</tr>
 		</thead>
@@ -33,7 +33,7 @@
 				</td>
 				<td >
 					@foreach($work->tags as $tag) 
-						#{{ trim($tag->name) }}
+						<span class="label label-primary">{{ trim($tag->name) }}</span>
 					@endforeach</td>
 				<td>
 					<div class="row">

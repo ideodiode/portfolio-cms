@@ -5,8 +5,66 @@ class PostsController extends BaseController {
 
 	public function publicIndex()
 	{
+		$perPage = 5;
+		$categories = array();
+		$choice = null;
+		
+		// Get all categories in settings
+		if (Setting::has('work.categoryIDs') && count(Setting::get('work.categoryIDs')) != 0){
+			$categoryIDs = Setting::get('work.categoryIDs');
+			$categories = Tag::whereIn('id', $categoryIDs)->get();
+		}
+		
+		// Get dates
+		$rawDates = Post::select(DB::raw('YEAR(created_at) year, MONTH(created_at) month, MONTHNAME(created_at) month_name, COUNT(*) post_count'))
+			->groupBy('year')
+			->groupBy('month')
+			->orderBy('year', 'desc')
+			->orderBy('month', 'desc')
+			->get();
+		
+		$currentY = null;
+		$years = array();
+		for($i = 0; $i < count($rawDates); $i++){
+			$date = $rawDates[0];
+			if($currentY != $date->year)
+				$years[$date->year] = array();
+			
+			$month = array('name' => $date->month_name, 'number'=> $date->month, 'count'=> $date->post_count);
+			array_push($years[$date->year], $month);
+		}
+
+		
+		// Get works tagged and paginated
+		if (Input::has('category')&& Input::get('category') != 'All'){
+			$choice = Input::get('category');
+			
+			$posts = Post::with('tags')
+				->select('posts.id', 'posts.title', 'posts.intro', 'posts.created_at')
+				->leftJoin('taggables', function($join){
+					$join->on('posts.id', '=', 'taggables.taggable_id')
+						->where('taggables.taggable_type', '=', 'Post');
+				})
+				->leftJoin('tags', function($join) use ($choice){
+					$join->on('taggables.tag_id', '=', 'tags.id')
+						->where('tags.name', '=', $choice);
+				})
+				->where('tags.name', '=', $choice)
+				->orderBy('created_at', 'desc')
+				->paginate($perPage);
+		}
+		else
+			$posts = Post::select('posts.id', 'posts.title', 'posts.intro', 'posts.created_at')
+				->orderBy('created_at', 'desc')
+				->with('tags')->paginate($perPage);
+				
+		Paginator::setViewName('pagination::simple');
+		
         Return View::make('posts.public')
-			->with('posts', Post::with('tags')->get());
+			->with('posts', $posts)
+			->with('categories', $categories)
+			->with('choice', $choice)
+			->with('years', $years);
 	}
 
 	/**
@@ -15,7 +73,7 @@ class PostsController extends BaseController {
 	 * @return Response
 	 */
 	public function index()
-	{
+	{		
         Return View::make('posts.index')
 			->with('posts', Post::with('tags')->paginate(10));
 	}
@@ -66,9 +124,12 @@ class PostsController extends BaseController {
 	 */
 	public function create()
 	{
+		$relatedTagIDs = array();
+		
+		$tagsLists = Tag::getLists($relatedTagIDs);
+		$tags = $tagsLists['tags'];
         return View::make('posts.create')
-			->with('tags', Tag::select('name')
-				->orderBy('name', 'asc')->get());
+			->with('tags', $tags);
 	}
 
 	/**

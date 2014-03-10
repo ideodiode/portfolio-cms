@@ -90,13 +90,20 @@ body {
 
 .icon-btn>.glyphicon{
   font-size:1.5em;
-  
 }
+
 .icon-btn>.btn-text{
   top:9px;
   position: absolute;
 }
 
+.icon-btn.active>.glyphicon{
+  color: #5BC0DE;
+}
+
+.icon-btn.active>.glyphicon.glyphicon-star{
+  color: gold;
+}
 /*
  * Global add-ons
  */
@@ -333,19 +340,19 @@ nav.navbar{
   height: 30px;
   line-height: 30px;
   position: absolute;
-  right: 2px;
+  right: 4px;
   text-align: center;
   top: 6px;
   width: 30px;
-  font-size: 2em;
+  font-size: 1.8em;
   cursor:default;
   color: gold;
 }
 .works-favorite-img.glyphicon-star-empty{
-  font-size: 3em;
+  font-size: 2.5em;
   top: 6px;
   right: 6px;
 }
 .works-favorite-img.glyphicon-star-empty{
-  color: #272B2E;
+  color: #27282E;
 }

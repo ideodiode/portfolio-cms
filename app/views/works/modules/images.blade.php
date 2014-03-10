@@ -77,7 +77,6 @@ $("#imgUpload").change(function (){
  *	Handler after successful img upload
  */
 function imgUploadHandler(response){
-	console.log("TEST");
 	// Insert /thumbsY/ into url
 	var urlParts = response.url.split("/");
 	var filename = urlParts.pop();

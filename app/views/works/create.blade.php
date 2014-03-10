@@ -46,16 +46,6 @@
 		<div class="form-group">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<h3 class="panel-title">Short Description</h3>
-				</div>
-				<label for="intro" class="sr-only">Short Description:</label>
-				<textarea class="input-block-level summernote" id="summernote1" name="sm_description" >{{{ Input::old('sm_description') }}}</textarea>
-			</div>
-		</div>
-		
-		<div class="form-group">
-			<div class="panel panel-default">
-				<div class="panel-heading">
 					<h3 class="panel-title">Full Description</h3>
 				</div>
 				<label for="body" class="sr-only">Full Description:</label>

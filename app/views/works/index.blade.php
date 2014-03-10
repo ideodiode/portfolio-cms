@@ -17,11 +17,6 @@
 				<span class="hidden-xs btn-text">New Work</span>
 				<span class="hidden-xs invisible">New Work</span>
 			</a>
-			<a type="button" href="" class="btn btn-primary icon-btn">
-				<span class="glyphicon glyphicon-star"></span>
-				<span class="hidden-xs btn-text">Featured</span>
-				<span class="hidden-xs invisible">Featured</span>
-			</a>
 			<a type="button" href="{{ action('WorksController@getSettings') }}" class="btn btn-primary icon-btn">
 				<span class="glyphicon glyphicon-cog"></span>
 				<span class="hidden-xs btn-text">Settings</span>
@@ -29,18 +24,21 @@
 			</a>
 		</div>
 		<div class="col-xs-6 col-sm-4 slim-padding">
+			
 			<div class="btn-group btn-group pull-right" data-toggle="buttons">
 				<label class="btn btn-primary btn-group icon-btn {{{ $listLayout[0] or '' }}}">
 					<input type="radio" name="layout" id="listLayout" {{ $listLayout[1] or '' }}>
 					<span class="glyphicon glyphicon-th-list"></span>
 				</label>
-				<label class="btn btn-primary btn-group icon-btn {{{ $smBlockLayout[0] or '' }}}">
-					<input type="radio" name="layout" id="smBlockLayout" {{ $smBlockLayout[1] or '' }}>
+				<label class="btn btn-primary btn-group icon-btn {{{ $blockLayout[0] or '' }}}">
+					<input type="radio" name="layout" id="blockLayout" {{ $blockLayout[1] or '' }}>
 					<span class="glyphicon glyphicon-th"></span>
 				</label>
-				<label class="btn btn-primary btn-group icon-btn {{{ $lgBlockLayout[0] or '' }}}">
-					<input type="radio" name="layout" id="lgBlockLayout" {{ $lgBlockLayout[1] or '' }}>
-					<span class="glyphicon glyphicon-th-large"></span>
+			</div>
+			<div class="btn-group btn-group pull-right" data-toggle="buttons">
+				<label class="btn btn-primary btn-group icon-btn">
+					<input type="checkbox" name="featured" id="featuredCheckbox">
+					<span class="glyphicon glyphicon-star"></span>
 				</label>
 			</div>
 		</div>
@@ -94,34 +92,61 @@
 	
 	
 	/*
+	*	Update layout when featured checkbox toggled
+	*/
+	$(":input[name='featured']").change(function () {
+		if( window.layout == "list"){
+			data = {layout_type: id};
+			if($("input[name='featured']").prop("checked"))
+				data["featured"] = true;
+			
+			$("#layout").addClass("invisible");
+			sendData(data, "GET", "/admin/works")
+			.done(function(response){
+				$("#layout").empty().html(response.html);
+				$('#gallery').imagesLoaded( function(){
+					updateWookmark(id);
+				});
+			});
+		}
+		else if (window.layout == "block"){
+			data = {layout_type: id};
+			if($("input[name='featured']").prop("checked"))
+					data["featured"] = true;
+					
+			sendData(data, "GET", "/admin/works")
+			.done(function(response){
+				$("#layout").empty().html(response.html);
+			});
+		}
+	});
+	
+	/*
 	*	Update layout when layout radio toggled
 	*/
 	$(":input[type=radio]").change(function () {
 		id = $('input[name=layout]:checked').attr('id');
 		
-		if (id != 'listLayout'){
-			// If toggle was previously on list, get block layout
-			if( window.layout == "list"){
-				data = {layout_type: id};
-				
-				$("#layout").addClass("invisible");
-				sendData(data, "GET", "/admin/works")
-				.done(function(response){
-					$("#layout").empty().html(response.html);
-					$('#gallery').imagesLoaded( function(){
-						updateWookmark(id);
-						window.layout = "block";
-					});
-				});
-			}
-			else{
-				updateWookmark(id);
-				window.layout = "block";
-			}
-		}
-		else {
-			// Layout must have been block previously
+		if (id == 'blockLayout'){
 			data = {layout_type: id};
+			if($("input[name='featured']").prop("checked"))
+				data["featured"] = true;
+			
+			$("#layout").addClass("invisible");
+			sendData(data, "GET", "/admin/works")
+			.done(function(response){
+				$("#layout").empty().html(response.html);
+				$('#gallery').imagesLoaded( function(){
+					updateWookmark(id);
+					window.layout = "block";
+				});
+			});
+		}
+		else if (id == 'listLayout'){
+			data = {layout_type: id};
+			if($("input[name='featured']").prop("checked"))
+					data["featured"] = true;
+					
 			sendData(data, "GET", "/admin/works")
 			.done(function(response){
 				$("#layout").empty().html(response.html);
@@ -135,41 +160,17 @@
 	*	Update wookmark using :input id
 	*/
 	function updateWookmark(id){
-		if (id == 'lgBlockLayout'){
-			width = 300;
-			offset = 10;
-		}
-		else {
-			width = 150;
-			offset = 5;
-		}
-		// If width isn't set, set it and wait for animation
-		if (window.layout != "list" && $('#gallery img').first().css("max-width") != width+"px"){
-			// Change session variable
-			data = {session: id};
-			sendData(data, "GET", "/admin/works");			
-			
-			$('#gallery img').css( "max-width", width+"px");
-			$('#gallery .workContainer').css( "max-width", width+"px");
-			$('#gallery .workContainer').on('webkitTransitionEnd transitionend otransitionend', function(e) {
-				$('#gallery .workContainer').wookmark({
-					autoResize: true,
-					container: $('#gallery'),
-					itemWidth: width,
-					fillEmptySpace: true,
-					offset: offset
-				});
-			});
-		}
-		else{	
-			$('#gallery .workContainer').wookmark({
-				autoResize: true,
-				container: $('#gallery'),
-				itemWidth: width,
-				fillEmptySpace: true,
-				offset: offset
-			});
-		}
+	
+		var width = 150;
+		var offset = 5;
+		$('#gallery .workContainer').wookmark({
+			autoResize: true,
+			container: $('#gallery'),
+			itemWidth: width,
+			fillEmptySpace: true,
+			offset: offset
+		});
+		
 		$("#layout").removeClass("invisible");
 	};
 	
