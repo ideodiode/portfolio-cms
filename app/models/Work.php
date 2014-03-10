@@ -18,7 +18,6 @@ class Work extends Eloquent {
 		$rules = array(
 		//ignore uniqueness for given id
 		'title' => 'required|unique:works,title,'.$id,
-		'sm_description' => 'required',
 		'lg_description' 	=> 'required',
 		'img_order'	=> 'required',
 		'thumbnail_filepath'	=> 'required',

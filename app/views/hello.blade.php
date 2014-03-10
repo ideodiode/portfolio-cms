@@ -2,7 +2,7 @@
 
 @section('content')
 
-@if(isset($features))
+@if($features->count() > 0)
 	<div id="carousel">
 		<div id="carousel-featured" class="carousel slide" data-ride="carousel">
 			<!-- Indicators -->
@@ -34,7 +34,7 @@
 			<div class="text-center">
 				<h1>You have arrived.</h1>
 				<p><em>Welcome to ideodiode.com, currently in development and to be released soon.</em></p>
-				<p>This site is currently being used as a demo. I do not claim any images that appear on this site. As the site is still under construction, certain functionality may not be implemented and not all platforms have been tested. All public facing pages are due to be reworked with new css for better accessibility and responsiveness.</p>
+				<p>This site is currently being used as a demo. I do not claim any images that appear on this site. As the site is still under construction, certain functionality may not be implemented and not all platforms have been tested. All public facing pages are due to be reworked with new css for better accessibility, responsiveness, and retina screen support.</p>
 				<p>ideodiode.com was developed in PHP using the laravel 4 framework. The admin console (found via the button on the footer below), is designed as a CMS for project portfolios.</p>
 			</div>
 		</div>
