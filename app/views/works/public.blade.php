@@ -20,13 +20,13 @@
 		</span>
 	</div>
 	
-	@if ($works->isEmpty())
-		<div class="text-center">
-			<p>There are no works under '{{ $choice }}' :(</p>
-		</div>
-	@else
-		<div class="row slim-padding">
-			<div id="gallery" style="position:relative">
+	<div class="row slim-padding">
+		<div id="gallery" style="position:relative">
+			@if ($works->isEmpty())
+				<div class="text-center">
+					<p>There are no works under '{{ $choice }}' :(</p>
+				</div>
+			@else
 				@foreach($works as $work)
 					<a href="{{ action('WorksController@show', $work->id) }}">
 						<div class="workContainer highlight">
@@ -37,10 +37,9 @@
 						</div>
 					</a>
 				@endforeach
-			</div>
+			@endif
 		</div>
-	@endif
-	
+	</div>
 </div>
 
 <script type="text/javascript">
