@@ -18,7 +18,7 @@
 			@foreach($images as $image)
 				<div>
 					<a href={{ action('ImagesController@edit', $image->id) }}  class="invisible">
-						<img width=200 src={{ asset($image->path.'/xthumbs/'.$image->name) }} alt={{ $image->name }} class="thumbnail-img highlight">
+						<img width=200 src={{ asset($image->path.'/xThumbs/'.$image->name) }} alt={{ $image->name }} class="thumbnail-img highlight">
 					</a>
 				</div>
 			@endforeach

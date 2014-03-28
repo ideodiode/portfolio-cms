@@ -77,7 +77,7 @@ class TagsController extends BaseController {
 			
 			// Sort taggables into types
 			foreach($taggables as $taggable){
-				if($taggable->taggable_type == "post")
+				if($taggable->taggable_type == "Post")
 					$postIDs[] = $taggable->taggable_id;
 				else
 					$workIDs[] = $taggable->taggable_id;
@@ -91,7 +91,7 @@ class TagsController extends BaseController {
 				$posts = Post::whereIn('id',$postIDs)->get();
 				
 				foreach($posts as $post){
-					$post['taggable_type'] = 'post';
+					$post['taggable_type'] = 'Post';
 					$taggables->add($post);
 				}
 			}
@@ -99,7 +99,7 @@ class TagsController extends BaseController {
 				$works = Work::whereIn('id', $workIDs)->get();
 				
 				foreach($works as $work){
-					$work['taggable_type'] = 'work';
+					$work['taggable_type'] = 'Work';
 					$taggables->add($work);
 				}
 			}

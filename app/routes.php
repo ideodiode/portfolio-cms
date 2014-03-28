@@ -24,6 +24,8 @@ Route::get('contact', function()
 
 Route::get('posts', array('uses' => 'PostsController@publicIndex'));
 Route::get('works', array('uses' => 'WorksController@publicIndex'));
+Route::get('posts/{id}', array('uses' => 'PostsController@show'));
+Route::get('works/{id}', array('uses' => 'WorksController@show'));
 
 /*
 *	Admin console
